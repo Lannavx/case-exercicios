@@ -24,7 +24,7 @@ def escrever_json_faturamento():
     '''Cria um arquivo JSON com os dados de faturamento. '''
     lista_dias = []
     for i in range(randint(28,31)): 
-        dia = {'Dia': f'{i+1}', 'Valor': round(uniform(0, 1500.99), 2)}
+        dia = {'dia': f'{i+1}', 'valor': round(uniform(0, 1500.99), 2)}
         lista_dias.append(dia)
 
     with open('dados.json', 'w') as file:
@@ -58,18 +58,16 @@ def contar_dias_maior_media():
     '''Identifica a quantidade de dias com faturamento maior que a média'''
     global qnt_dias_maior_media
     for dados_dia in lista_faturamento:
-        if dados_dia['Valor'] > media:
+        if dados_dia['valor'] > media:
             qnt_dias_maior_media += 1
 
-
-escrever_json_faturamento()
 
 # Lista com faturamento baseado no arquivo JSON
 lista_faturamento = ler_json(CAMINHO_JSON)
 
 # Calcula o total de faturamento, menor valor e maior valor
 for i in range(len(lista_faturamento)):
-    valor = lista_faturamento[i]['Valor']
+    valor = lista_faturamento[i]['valor']
 
     verifica_se_faturou(valor)
     verifica_menor_valor(valor)
@@ -81,8 +79,8 @@ media = total_faturamento / dias_com_faturamento
 contar_dias_maior_media()
 
 # Exibe os resultados
-print(f'Menor valor de faturamento: R${menor_valor}')
-print(f'Maior valor de faturamento: R${maior_valor}')
+print(f'Menor valor de faturamento: R${menor_valor:.2f}')
+print(f'Maior valor de faturamento: R${maior_valor:.2f}')
 print(f'Número de dias com faturamento superior à média: {qnt_dias_maior_media}')
 
         
